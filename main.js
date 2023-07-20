@@ -1,96 +1,64 @@
-canvas = document.getElementById('myCanvas')
-ctx = canvas.getContext("2d")
+var canvas = new fabric.Canvas('myCanvas');
+ blockY=1;
+ blockX=1;
 
-greencar_width = 75;
-greencar_height = 100;
+blockImageWidth = 350;
+blockImageHeight = 430;
 
-backgroundImage = "parkingLot.jpg";
-greencarImage = "car2.png";
+var blockImageObject= "";
 
-greencar_x = 5;
-greencar_y = 225;
+function newImage(getImage)
+{
+fabric.Image.fromURL(getImage, function(Img){
+blockImageObject = Img;
 
-function add() {
-background_imgTag = new Image();
-background_imgTag.onload = uploadBackground;
-background_imgTag.src = backgroundImage;
-
-greencar_imgTag = new Image();
-greencar_imgTag.onload = uploadGreenCar;
-greencar_imgTag.src = greencarImage;
+blockImageObject.scaleToWidth(blockImageWidth);
+blockImageObject.scaleToHeight(blockImageHeight);
+blockImageObject.set({
+top:blockY,
+left:blockX
+});
+canvas.add(blockImageObject);
+});
 }
 
-function uploadBackground() {
-ctx.drawImage(background_imgTag, 0, 0, canvas.width, canvas.height);
-}
-
-function uploadGreenCar() {
-ctx.drawImage(greencar_imgTag, greencar_x, greencar_y, greencar_width, greencar_height);
-}
 window.addEventListener("keydown", myKeyDown);
 
 function myKeyDown(e)
 {
-	keyPressed = e.keyCode;
-	console.log(keyPressed);
-		if(keyPressed == '38')
-		{
-			up();
-			console.log("up");
-		}
-	
-		if(keyPressed == '40')
-		{
-			down();
-			console.log("down");
-		}
-		
-		if(keyPressed == '37')
-		{
-			left();
-			console.log("left");
-		}
-	
-		if(keyPressed == '39')
-		{
-			right();
-			console.log("right");
-		}
-		
-		
-}
+keyPressed = e.keyCode;
+console.log(keyPressed);
 
-function up()
-{
-if(greencar_y >=0){
-greencar_y = greencar_y -10;
-uploadBackground();
-uploadGreenCar();
-}
-}
-function down()
-{
-	if(greencar_y <=300){
-	greencar_y = greencar_y +10;
-	uploadBackground();
-	uploadGreenCar();
+	if(keyPressed == '69')
+	{
+		newImage('rr1.png');
+		console.log("e")
 	}
+	if(keyPressed == '86')
+	{
+		blockX = 200;
+		newImage('gr.png');
+		console.log("v")
+	}
+	
+	if(keyPressed == '65')
+	{
+		blockX =350;
+	    newImage('yr.png');
+		console.log("a")
+	}
+	if(keyPressed == '82')
+	{
+		blockX = 600;
+		newImage('pr.png');
+		console.log("r")
+	}
+	if(keyPressed == '73')
+	{
+		blockX = 700;
+	    newImage('br.png');
+		console.log("i")
+	}
+	
 }
 
-function left()
-{
-	if(greencar_x >=0){
-		greencar_x = greencar_x -10;
-		uploadBackground();
-		uploadGreenCar();
-		}
-}
-
-function right()
-{
-	if(greencar_x <=725){
-		greencar_x = greencar_x +10;
-		uploadBackground();
-		uploadGreenCar();
-		}
-}
